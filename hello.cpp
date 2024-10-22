@@ -1,37 +1,48 @@
 #include <iostream>
 using namespace std;
-void nhapMang(int a[205][205], int n)
-{
-   for (int i = 0; i < n; i++)
-   {
-      for (int j = 0; j < 3; j++)
-      {
-         cin >> a[i][j];
-      }
-   }
-}
 int main()
 {
-   int n, dem = 0, a[205][205], S = 0;
-   cin >> n;
-   nhapMang(a, n);
-   for (int i = 0; i < n; i++)
+   int n, m;
+   cin>>n>>m;
+    int hang1 = 0, hangn = n, cot1 = 0, cotn = m, dem=1;
+   
+   int a[100][100];
+   while (hang1 <= hangn && cot1 <= cotn)
    {
-      dem = 0;
-      for (int j = 0; j < 3; j++)
+      for (int i = cot1; i < cotn ; i++)
       {
-         if (a[i][j] == 1)
-         {
-            dem += 1;
-         }
-         if (dem == 2)
-         {
-            S += 1;
-            break;
-         }
+        a[hang1][i]=dem;
+        dem+=1;
       }
+      hang1+=1;
+      for (int i=hang1; i<hangn ; i++)
+      {
+         a[i][cotn]=dem;
+         dem+=1;
+      }
+      cotn-=1;
+      for(int i=cotn; i>=cot1; i--)
+      {
+         a[hangn][i]=dem;
+         dem+=1;
+
+      }
+      hangn-=1;
+      for(int i=hangn; i>=hang1;i--)
+      {
+
+         a[i][cot1]=dem;
+         dem+=1;
+      }
+      cot1+=1;
+}
+for(int i=0;i<n;i++)
+{
+   for(int j=0;j<m;j++)
+   {
+      cout<<a[i][j]<<" ";
    }
-   cout << S;
-   cout << "hello ";
-   return 0;
+   cout<<endl;
+}
+return 0;
 }
